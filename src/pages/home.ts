@@ -69,9 +69,12 @@ export const home = () => {
     },
   });
 
-  [...takeoverContent?.children].forEach((child, index) => {
+  const children = [...takeoverContent?.children];
+  children.forEach((child, index) => {
     const formatted = new SplitText(child, { type: 'lines' });
     formatted.lines.forEach((line) => line.classList.add('split-mask'));
+
+    const delay = index === 0 ? 0 : index === children.length - 1 ? '<1' : '<0.5';
 
     takeoverTl.from(
       formatted.lines,
@@ -81,7 +84,7 @@ export const home = () => {
         translateY: '100%',
         stagger: 0.1,
       },
-      index === 0 ? '<' : '<1'
+      delay
     );
   });
 };
